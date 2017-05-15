@@ -14,6 +14,7 @@ const keyword = Rx.Observable.fromEvent(searchInput, 'input');
 const selectItem = Rx.Observable.fromEvent(suggestList, 'click');
 
 keyword
+	.debounceTime(100)
     .switchMap(e => getSuggestList(e.target.value), (e, res) => res[1])	//取用第二個值
     .subscribe(list => render(list))
 
